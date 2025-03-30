@@ -11,7 +11,6 @@ import {
   Download,
   ExternalLink,
   Menu,
-  Filter,
   ChevronDown,
   Smartphone,
   Wifi,

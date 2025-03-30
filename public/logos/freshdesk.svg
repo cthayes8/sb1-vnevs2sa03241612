@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="160" height="40" viewBox="0 0 160 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <path d="M20 10c-5.5 0-10 4.5-10 10s4.5 10 10 10 10-4.5 10-10-4.5-10-10-10zm-2 15l-3-3 2-2 1 1 4-4 2 2-6 6z" fill="currentColor"/>
+  <path d="M55 15h5v10h-5V15zm25 0h5v10h-5V15zm25 0h5v10h-5V15z" fill="currentColor"/>
+  <path d="M140 10c-5.5 0-10 4.5-10 10s4.5 10 10 10 10-4.5 10-10-4.5-10-10-10zm-2 15l-3-3 2-2 1 1 4-4 2 2-6 6z" fill="currentColor"/>
+</svg> 

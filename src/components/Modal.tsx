@@ -9,37 +9,41 @@ interface ModalProps {
 }
 
 const Modal: React.FC<ModalProps> = ({ isOpen, onClose, children }) => {
+  if (!isOpen) return null;
+
   return (
     <AnimatePresence>
-      {isOpen && (
-        <>
+      <div className="fixed inset-0 z-50 overflow-y-auto">
+        <div className="flex min-h-screen items-center justify-center p-4">
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="fixed inset-0 bg-black/50 backdrop-blur-sm z-50"
+            className="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity"
             onClick={onClose}
           />
-          <div className="fixed inset-0 overflow-y-auto z-50">
-            <div className="min-h-full flex items-center justify-center p-4">
-              <motion.div
-                initial={{ opacity: 0, scale: 0.95, y: 20 }}
-                animate={{ opacity: 1, scale: 1, y: 0 }}
-                exit={{ opacity: 0, scale: 0.95, y: 20 }}
-                className="w-full max-w-xl relative"
+
+          <motion.div
+            initial={{ opacity: 0, scale: 0.95 }}
+            animate={{ opacity: 1, scale: 1 }}
+            exit={{ opacity: 0, scale: 0.95 }}
+            className="relative w-full max-w-lg"
+          >
+            <div className="absolute right-2 top-2 z-10">
+              <button
+                type="button"
+                className="rounded-lg bg-white/10 p-2 text-gray-400 hover:text-gray-500 focus:outline-none backdrop-blur-sm"
+                onClick={onClose}
               >
-                <button
-                  onClick={onClose}
-                  className="absolute -right-2 -top-2 bg-tlco-purple rounded-full p-2 text-white hover:bg-tlco-purple/80 transition-colors z-10 hover:animate-glow"
-                >
-                  <X size={20} />
-                </button>
-                {children}
-              </motion.div>
+                <span className="sr-only">Close</span>
+                <X className="h-6 w-6" aria-hidden="true" />
+              </button>
             </div>
-          </div>
-        </>
-      )}
+            
+            {children}
+          </motion.div>
+        </div>
+      </div>
     </AnimatePresence>
   );
 };

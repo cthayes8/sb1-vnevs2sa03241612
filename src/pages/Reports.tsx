@@ -1,14 +1,12 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { 
   FileSpreadsheet,
   Download,
   Calendar,
-  Filter,
   ChevronDown,
   Users,
   TrendingUp,
-  Building,
   Search
 } from 'lucide-react';
 import * as XLSX from 'xlsx';
@@ -51,7 +49,6 @@ const reports: ReportConfig[] = [
 ];
 
 const Reports = () => {
-  const [selectedReport, setSelectedReport] = useState<ReportType | ''>('');
   const [dateRange, setDateRange] = useState<'all' | '30' | '90' | 'custom'>('30');
   const [startDate, setStartDate] = useState<string>(
     format(new Date().setDate(new Date().getDate() - 30), 'yyyy-MM-dd')

@@ -1,10 +1,8 @@
-import React from 'react';
 import { motion } from 'framer-motion';
 import { 
   TrendingUp, 
   Users, 
   DollarSign, 
-  Clock,
   MessageSquare,
   FileSpreadsheet,
   Zap,
@@ -256,7 +254,7 @@ const DashboardHome = () => {
           >
             <h2 className="text-lg font-semibold text-foreground mb-4">Quick Actions</h2>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-              {quickActions.map((action, index) => (
+              {quickActions.map((action) => (
                 <motion.a
                   key={action.title}
                   href={action.path}

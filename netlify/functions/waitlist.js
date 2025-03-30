@@ -132,8 +132,8 @@ exports.handler = async (event) => {
           email: 'noreply@tlco.ai',
           name: 'TLCO AI'
         },
-        subject: 'Welcome to TLCO - The Future of Telecom Distribution 🚀',
-        text: `Welcome to TLCO, ${name}! Thank you for joining our waitlist. You'll be among the first to experience the future of telecom distribution.`,
+        subject: 'Welcome to the TLCO Beta Program',
+        text: `Welcome to the future, ${name}! You're now part of an exclusive group of beta testers who will shape the future of telecom distribution. We'll keep you updated on the beta launch timeline and your early access details.`,
         html: generateEmailTemplate(name)
       };
 

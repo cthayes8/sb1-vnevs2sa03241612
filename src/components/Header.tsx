@@ -1,11 +1,13 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Menu, X, Sparkles } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import { useWaitlistStore } from '../store/waitlistStore';
 
 export function Header() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const { openModal } = useWaitlistStore();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -25,10 +27,8 @@ export function Header() {
 
   return (
     <header
-      className={`fixed w-full z-50 transition-all duration-300 ${
-        isScrolled
-          ? 'bg-white shadow-sm'
-          : 'bg-white/80 backdrop-blur-xl'
+      className={`fixed w-full z-50 transition-colors duration-200 ${
+        isScrolled ? 'bg-white/80 backdrop-blur-sm border-b border-gray-200/50' : ''
       }`}
     >
       <div className="absolute inset-x-0 -top-40 -z-10 transform-gpu overflow-hidden blur-3xl sm:-top-80" aria-hidden="true">
@@ -71,6 +71,7 @@ export function Header() {
               </a>
             ))}
             <button
+              onClick={() => openModal('header_nav')}
               className="relative group"
             >
               <div className="absolute -inset-0.5 bg-gradient-to-r from-purple-600 to-cyan-600 rounded-lg blur opacity-60 group-hover:opacity-100 transition duration-200"></div>
@@ -86,9 +87,8 @@ export function Header() {
           <div className="flex md:hidden">
             <button
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              className="text-gray-600 hover:text-purple-600 transition-colors duration-200"
+              className="text-gray-600 hover:text-purple-600"
             >
-              <span className="sr-only">Open main menu</span>
               {isMobileMenuOpen ? (
                 <X className="h-6 w-6" />
               ) : (
@@ -120,7 +120,13 @@ export function Header() {
                   </a>
                 ))}
                 <div className="mt-4 px-3">
-                  <button className="relative w-full group">
+                  <button
+                    onClick={() => {
+                      openModal('header_mobile');
+                      setIsMobileMenuOpen(false);
+                    }}
+                    className="relative w-full group"
+                  >
                     <div className="absolute -inset-0.5 bg-gradient-to-r from-purple-600 to-cyan-600 rounded-lg blur opacity-60 group-hover:opacity-100 transition duration-200"></div>
                     <div className="relative w-full px-6 py-2.5 bg-white rounded-lg leading-none flex items-center justify-center">
                       <span className="text-purple-600 group-hover:text-purple-700 font-semibold transition duration-200">
@@ -137,3 +143,5 @@ export function Header() {
     </header>
   );
 }
+
+export default Header;

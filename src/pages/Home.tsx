@@ -1,22 +1,15 @@
-import React, { useState } from 'react';
-import { MessageSquare, Clock, Coins, Share2, FileSpreadsheet, LineChart, UserPlus, Bot, CheckCircle, Users, Zap, BarChart, FileText, Smartphone, Database } from 'lucide-react';
-import { motion } from 'framer-motion';
+import { useWaitlistStore } from '../store/waitlistStore';
 import ParticleBackground from '../components/ParticleBackground';
 import { HeroWithChat } from '../components/HeroWithChat';
-import QuoteAnimation from '../components/QuoteAnimation';
 import Modal from '../components/Modal';
 import WaitlistForm from '../components/WaitlistForm';
 import { FeaturesGrid } from '../components/FeaturesGrid';
 import { BetaWaitlist } from '../components/EarlyAdopterProgram';
 import { HowItWorks } from '../components/HowItWorks';
+import LogoCarousel from '../components/LogoCarousel';
 
 const Home = () => {
-  const [isWaitlistOpen, setIsWaitlistOpen] = useState(false);
-  const [email, setEmail] = useState('');
-
-  const handleWaitlistClick = () => {
-    setIsWaitlistOpen(true);
-  };
+  const { isOpen, closeModal } = useWaitlistStore();
 
   return (
     <>
@@ -39,12 +32,17 @@ const Home = () => {
 
       {/* Beta Waitlist - Single clear CTA */}
       <section className="relative">
-        <BetaWaitlist onCtaClick={handleWaitlistClick} />
+        <BetaWaitlist />
+      </section>
+
+      {/* Integration Partners Section */}
+      <section className="relative">
+        <LogoCarousel className="max-w-5xl mx-auto" />
       </section>
 
       {/* Waitlist Modal */}
-      <Modal isOpen={isWaitlistOpen} onClose={() => setIsWaitlistOpen(false)}>
-        <WaitlistForm onClose={() => setIsWaitlistOpen(false)} initialEmail={email} />
+      <Modal isOpen={isOpen} onClose={closeModal}>
+        <WaitlistForm />
       </Modal>
     </>
   );

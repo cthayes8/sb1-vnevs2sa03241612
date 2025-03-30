@@ -52,12 +52,18 @@ export default {
       },
       animation: {
         'pulse-subtle': 'pulse-subtle 2s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+        scroll: "scroll 20s linear infinite",
       },
       keyframes: {
         'pulse-subtle': {
           '0%, 100%': { opacity: 1 },
           '50%': { opacity: 0.8 }
-        }
+        },
+        scroll: {
+          to: {
+            transform: "translate(calc(-50% - 1rem))",
+          },
+        },
       }
     }
   },

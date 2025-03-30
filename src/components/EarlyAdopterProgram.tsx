@@ -1,9 +1,6 @@
-import React from "react";
 import { motion } from "framer-motion";
 import { Sparkles, Rocket, ArrowRight, MessageSquare, Zap, Star } from "lucide-react";
-
-// Utility function to combine class names
-const cn = (...classes: string[]) => classes.filter(Boolean).join(" ");
+import { useWaitlistStore } from '../store/waitlistStore';
 
 interface BenefitCardProps {
   icon: React.ReactNode;
@@ -19,47 +16,41 @@ function BenefitCard({ icon, title, description, delay }: BenefitCardProps) {
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
       transition={{ duration: 0.5, delay: delay * 0.1 }}
-      className="relative group"
+      className="rounded-xl border border-gray-200 bg-white p-6 shadow-sm hover:shadow-md transition-shadow duration-300"
     >
-      <div className="h-full overflow-hidden bg-white rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 border border-gray-100">
-        <div className="p-6 flex flex-col h-full">
-          <div className="mb-4 p-3 rounded-full bg-purple-50 w-fit group-hover:bg-purple-100 transition-colors duration-300">
-            {React.cloneElement(icon as React.ReactElement, { className: "h-6 w-6 text-purple-600" })}
-          </div>
-          <h3 className="text-xl font-bold mb-2 text-gray-900">{title}</h3>
-          <p className="text-gray-600 flex-grow">{description}</p>
-        </div>
+      <div className="mb-4 inline-block rounded-lg bg-purple-100 p-3 text-purple-600">
+        {icon}
       </div>
+      <h4 className="mb-2 text-lg font-semibold text-gray-900">{title}</h4>
+      <p className="text-gray-600">{description}</p>
     </motion.div>
   );
 }
 
-interface BetaWaitlistProps {
-  onCtaClick: () => void;
-}
+export function BetaWaitlist() {
+  const { openModal } = useWaitlistStore();
 
-export function BetaWaitlist({ onCtaClick }: BetaWaitlistProps) {
   const benefits = [
     {
-      icon: <Rocket />,
+      icon: <Rocket className="h-6 w-6" />,
       title: "Priority Access",
       description:
         "Be first in line to experience our enterprise AI platform when we launch",
     },
     {
-      icon: <MessageSquare />,
+      icon: <MessageSquare className="h-6 w-6" />,
       title: "Direct Input",
       description:
         "Shape our enterprise solution with your valuable feedback and requirements",
     },
     {
-      icon: <Zap />,
+      icon: <Zap className="h-6 w-6" />,
       title: "Enterprise Ready",
       description:
         "Get early access to enterprise-grade features and integrations",
     },
     {
-      icon: <Star />,
+      icon: <Star className="h-6 w-6" />,
       title: "VIP Support",
       description:
         "Receive dedicated support and strategic guidance during the beta phase",
@@ -90,11 +81,11 @@ export function BetaWaitlist({ onCtaClick }: BetaWaitlistProps) {
             Be among the first enterprises to leverage our advanced AI platform for telecom sales. Reserve your spot in our upcoming beta release.
           </p>
           <button
-            onClick={onCtaClick}
-            className="bg-gradient-to-r from-purple-600 to-cyan-600 text-white px-8 py-4 rounded-lg font-semibold hover:opacity-90 transition-all duration-300 shadow-lg hover:shadow-xl group"
+            onClick={() => openModal('beta_section')}
+            className="inline-flex items-center bg-gradient-to-r from-purple-600 to-cyan-600 text-white px-8 py-4 rounded-lg font-semibold hover:opacity-90 transition-all duration-300 shadow-lg hover:shadow-xl"
           >
             Request Beta Access
-            <ArrowRight className="ml-2 h-5 w-5 inline-block transition-transform group-hover:translate-x-1" />
+            <ArrowRight className="ml-2 h-5 w-5" />
           </button>
         </motion.div>
 

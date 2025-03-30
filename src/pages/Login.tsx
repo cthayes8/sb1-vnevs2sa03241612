@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useNavigate, useLocation } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { Lock, AlertCircle } from 'lucide-react';
 
@@ -10,7 +10,6 @@ const DEMO_CREDENTIALS = {
 
 const Login = () => {
   const navigate = useNavigate();
-  const location = useLocation();
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');

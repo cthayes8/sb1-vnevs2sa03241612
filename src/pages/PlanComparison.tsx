@@ -1,23 +1,14 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { 
-  Wifi, 
-  Phone, 
   Globe, 
-  Download, 
-  Upload, 
-  Clock, 
-  DollarSign,
-  Plus,
-  Minus,
-  Menu,
   Search,
-  Filter,
   ChevronDown,
-  Calculator
+  Download,
+  Wifi,
 } from 'lucide-react';
 import { supabase } from '../lib/supabase';
-import type { CarrierId } from '../types';
+import type { CarrierId } from '../types/index';
 
 interface RatePlan {
   id: string;

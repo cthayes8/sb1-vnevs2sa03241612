@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { Book, Calendar, User, Plus } from 'lucide-react';
@@ -16,13 +16,11 @@ const Blog = () => {
   const [page, setPage] = useState(1);
   const [hasMore, setHasMore] = useState(true);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
-  const [isConnected, setIsConnected] = useState(false);
 
   useEffect(() => {
     const init = async () => {
       // Test connection first
       const connected = await testConnection();
-      setIsConnected(connected);
       
       if (!connected) {
         setError('Unable to connect to the database. Please try again later.');

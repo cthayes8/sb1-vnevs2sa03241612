@@ -89,7 +89,6 @@ const Agent = () => {
           sandbox="allow-scripts allow-same-origin allow-forms allow-popups"
           referrerPolicy="origin"
           loading="lazy"
-          importance="high"
           allow="microphone; camera"
         />
       </div>

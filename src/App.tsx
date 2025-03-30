@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import { useThemeStore } from './store/themeStore';
-import Header from './components/Header';
-import Footer from './components/Footer';
+import { Header } from './components/Header';
+import { Footer } from './components/Footer';
 import Home from './pages/Home';
 import Blog from './pages/Blog';
 import BlogPost from './pages/BlogPost';

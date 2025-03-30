@@ -1,5 +1,4 @@
-import React from 'react';
-import { Phone, Network } from 'lucide-react';
+import { Network } from 'lucide-react';
 import { motion } from 'framer-motion';
 import ParticleBackground from '../components/ParticleBackground';
 

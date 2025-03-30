@@ -1,10 +1,9 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Outlet, useNavigate, useLocation, Link } from 'react-router-dom';
 import { 
   MessageSquare, 
   BarChart3, 
-  Settings, 
   LogOut, 
   Users, 
   FileSpreadsheet, 
@@ -19,7 +18,6 @@ import {
 } from 'lucide-react';
 import { supabase } from '../lib/supabase';
 import { useNotificationStore } from '../store/notificationStore';
-import { useThemeStore } from '../store/themeStore';
 import NotificationPanel from '../components/NotificationPanel';
 import ThemeToggle from '../components/ThemeToggle';
 

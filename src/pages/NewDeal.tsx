@@ -1,22 +1,26 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
 import {
   ChevronLeft,
-  Building,
   Globe,
-  Phone,
   Calendar,
   DollarSign,
-  Radio,
   Smartphone,
   Wifi,
   Router,
   AlertCircle,
-  FileText
 } from 'lucide-react';
 import { supabase } from '../lib/supabase';
 import { format } from 'date-fns';
+
+interface RatePlan {
+  id: string;
+  Plan: string;
+  'Price Per Line': number;
+  'Plan Type': string;
+  Carrier: string;
+}
 
 interface DealFormData {
   // Company Information
@@ -55,7 +59,7 @@ const NewDeal = () => {
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
-  const [ratePlans, setRatePlans] = useState([]);
+  const [ratePlans, setRatePlans] = useState<RatePlan[]>([]);
   const [formData, setFormData] = useState<DealFormData>({
     customer_name: '',
     company_name: '',
@@ -266,7 +270,7 @@ const NewDeal = () => {
                   Voice Lines
                 </label>
                 <div className="relative">
-                  <Phone className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground w-5 h-5" />
+                  <Globe className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground w-5 h-5" />
                   <input
                     type="number"
                     id="voice_lines"
@@ -494,7 +498,7 @@ const NewDeal = () => {
                   Deal Title
                 </label>
                 <div className="relative">
-                  <FileText className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground w-5 h-5" />
+                  <Globe className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground w-5 h-5" />
                   <input
                     type="text"
                     id="title"

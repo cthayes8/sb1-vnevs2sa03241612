@@ -3,8 +3,9 @@ export type CarrierId = 'att' | 'verizon' | 'tmobile';
 export interface WaitlistFormData {
   name: string;
   email: string;
-  company?: string;
-  phone?: string;
+  company: string;
+  phone: string;
+  source: string;
 }
 
 export interface CardProps {
@@ -42,4 +43,17 @@ export interface ChatHistory {
   createdAt: number;
   preview: string;
   messages: ChatMessage[];
+}
+
+// Google Analytics
+declare global {
+  interface Window {
+    gtag: (
+      command: 'event',
+      action: string,
+      params: {
+        [key: string]: any;
+      }
+    ) => void;
+  }
 }

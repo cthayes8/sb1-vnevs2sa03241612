@@ -1,8 +1,20 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
 import { ChevronLeft, Search, Filter, ChevronDown, Smartphone, X } from 'lucide-react';
 import { supabase } from '../lib/supabase';
+
+interface Device {
+  id: number;
+  Carrier: string;
+  Manufacturer: string;
+  Model: string;
+  Device: string;
+  'Radio Technology': string[];
+  'LTE Technology': string[];
+  '5G Technology': string[];
+  created_at: string;
+}
 
 // Headers for certified devices table
 const tableHeaders = [
@@ -17,7 +29,7 @@ const tableHeaders = [
 
 const CertifiedDevices = () => {
   const navigate = useNavigate();
-  const [devices, setDevices] = useState([]);
+  const [devices, setDevices] = useState<Device[]>([]);
   const [loading, setLoading] = useState(true);
   const [searchTerm, setSearchTerm] = useState('');
   const [sortBy, setSortBy] = useState('Manufacturer');

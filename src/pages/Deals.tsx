@@ -1,20 +1,14 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { Link, useNavigate } from 'react-router-dom';
 import {
   ChevronLeft,
   Plus,
   Download,
-  Filter,
   ChevronDown,
-  DollarSign,
   Calendar,
   Users,
   Building,
-  Phone,
-  Mail,
-  MapPin,
-  Tag,
   Clock,
   AlertCircle,
   Search
@@ -25,8 +19,44 @@ import { supabase } from '../lib/supabase';
 import { format } from 'date-fns';
 import * as XLSX from 'xlsx';
 
+interface Customer {
+  name: string;
+  company_name: string;
+}
+
+interface AgentUser {
+  username: string;
+}
+
+interface Deal {
+  id: number;
+  title: string;
+  status: string;
+  value: number;
+  close_date: string | null;
+  probability: number;
+  carrier: string;
+  product_type: string;
+  monthly_revenue: number | null;
+  one_time_revenue: number | null;
+  total_revenue: number | null;
+  created_at: string;
+  customers?: Customer;
+  agent_users?: AgentUser;
+}
+
+interface DealStatus {
+  value: string;
+  label: string;
+  color: string;
+}
+
+interface DealsByStatus {
+  [key: string]: Deal[];
+}
+
 // Deal status configuration - removed closed_lost
-const dealStatuses = [
+const dealStatuses: DealStatus[] = [
   { value: 'lead', label: 'Lead', color: 'bg-blue-500' },
   { value: 'qualified', label: 'Qualified', color: 'bg-purple-500' },
   { value: 'proposal', label: 'Proposal', color: 'bg-yellow-500' },
@@ -36,12 +66,12 @@ const dealStatuses = [
 
 const Deals = () => {
   const navigate = useNavigate();
-  const [deals, setDeals] = useState([]);
+  const [deals, setDeals] = useState<Deal[]>([]);
   const [loading, setLoading] = useState(true);
   const [searchTerm, setSearchTerm] = useState('');
   const [statusFilter, setStatusFilter] = useState('');
   const [sortBy, setSortBy] = useState('created_at');
-  const [error, setError] = useState(null);
+  const [error, setError] = useState<string | null>(null);
 
   // DnD sensors
   const sensors = useSensors(
@@ -85,8 +115,8 @@ const Deals = () => {
     
     if (!over) return;
 
-    const dealId = active.id;
-    const newStatus = over.id;
+    const dealId = String(active.id);
+    const newStatus = String(over.id);
 
     try {
       const { error } = await supabase
@@ -98,19 +128,14 @@ const Deals = () => {
 
       // Update local state
       setDeals(deals.map(deal => 
-        deal.id === dealId ? { ...deal, status: newStatus } : deal
+        String(deal.id) === dealId ? { ...deal, status: newStatus } : deal
       ));
     } catch (error) {
       console.error('Error updating deal status:', error);
     }
   };
 
-  const getStatusColor = (status) => {
-    const statusConfig = dealStatuses.find(s => s.value === status);
-    return statusConfig?.color || 'bg-gray-500';
-  };
-
-  const formatCurrency = (amount) => {
+  const formatCurrency = (amount: number): string => {
     return new Intl.NumberFormat('en-US', {
       style: 'currency',
       currency: 'USD'
@@ -148,7 +173,7 @@ const Deals = () => {
     return matchesSearch && matchesStatus;
   });
 
-  const dealsByStatus = dealStatuses.reduce((acc, status) => {
+  const dealsByStatus: DealsByStatus = dealStatuses.reduce((acc: DealsByStatus, status) => {
     acc[status.value] = filteredDeals.filter(deal => deal.status === status.value);
     return acc;
   }, {});
@@ -276,7 +301,7 @@ const Deals = () => {
                     {dealsByStatus[status.value].map((deal) => (
                       <motion.div
                         key={deal.id}
-                        layoutId={deal.id}
+                        layoutId={String(deal.id)}
                         className="bg-card rounded-lg border border-border p-4 cursor-move hover:border-primary/40 transition-colors"
                       >
                         <div className="flex items-center justify-between mb-2">

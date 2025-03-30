@@ -1,16 +1,8 @@
-import React, { useState } from 'react';
-import { motion } from 'framer-motion';
+import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import {
   ChevronLeft,
-  Building,
-  User,
-  Mail,
-  Phone,
-  MapPin,
-  Briefcase,
-  Users,
-  AlertCircle
+  AlertCircle,
 } from 'lucide-react';
 import { supabase } from '../lib/supabase';
 

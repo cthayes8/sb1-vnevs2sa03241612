@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
 import { 
@@ -33,7 +33,6 @@ const MyAccount = () => {
   const [saving, setSaving] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [successMessage, setSuccessMessage] = useState<string | null>(null);
-  const [currentPassword, setCurrentPassword] = useState('');
   const [newPassword, setNewPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [changingPassword, setChangingPassword] = useState(false);
@@ -130,7 +129,6 @@ const MyAccount = () => {
       if (error) throw error;
 
       setSuccessMessage('Password updated successfully');
-      setCurrentPassword('');
       setNewPassword('');
       setConfirmPassword('');
       setTimeout(() => setSuccessMessage(null), 3000);

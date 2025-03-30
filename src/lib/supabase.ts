@@ -17,7 +17,7 @@ export const supabase = createClient<Database>(
 // Test the connection and configuration
 export const testConnection = async () => {
   try {
-    const { data, error } = await supabase
+    const { error } = await supabase
       .from('blog_posts')
       .select('count')
       .single();

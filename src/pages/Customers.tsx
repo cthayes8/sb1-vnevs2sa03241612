@@ -1,11 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
 import {
   ChevronLeft,
   Plus,
   Search,
-  Filter,
   ChevronDown,
   Building,
   Phone,
@@ -17,13 +16,29 @@ import {
 import { supabase } from '../lib/supabase';
 import { format } from 'date-fns';
 
+interface AgentUser {
+  username: string;
+}
+
+interface Customer {
+  id: number;
+  name: string;
+  company_name: string;
+  email: string | null;
+  phone: string | null;
+  city: string | null;
+  state: string | null;
+  created_at: string;
+  agent_users?: AgentUser;
+}
+
 const Customers = () => {
   const navigate = useNavigate();
-  const [customers, setCustomers] = useState([]);
+  const [customers, setCustomers] = useState<Customer[]>([]);
   const [loading, setLoading] = useState(true);
   const [searchTerm, setSearchTerm] = useState('');
   const [sortBy, setSortBy] = useState('created_at');
-  const [error, setError] = useState(null);
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     fetchCustomers();
@@ -42,7 +57,7 @@ const Customers = () => {
         .order(sortBy, { ascending: false });
 
       if (error) throw error;
-      setCustomers(data);
+      setCustomers(data || []);
     } catch (error) {
       console.error('Error fetching customers:', error);
       setError('Failed to load customers');

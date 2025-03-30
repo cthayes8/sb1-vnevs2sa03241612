@@ -1,8 +1,10 @@
-import React from 'react';
 import { motion } from 'framer-motion';
 import { Bot, ArrowRight, Sparkles } from 'lucide-react';
+import { useWaitlistStore } from '../store/waitlistStore';
 
 export function HeroWithChat() {
+  const { openModal } = useWaitlistStore();
+
   return (
     <div className="relative isolate overflow-hidden bg-white">
       {/* Background gradient */}
@@ -40,7 +42,10 @@ export function HeroWithChat() {
               Transform your telecom sales with our enterprise-grade AI platform. Automate workflows, get intelligent recommendations, and close deals faster.
             </p>
             <div className="mt-10 flex items-center gap-x-6">
-              <button className="relative group">
+              <button
+                onClick={() => openModal('hero_section')}
+                className="relative group"
+              >
                 <div className="absolute -inset-0.5 bg-gradient-to-r from-purple-600 to-cyan-600 rounded-lg blur opacity-60 group-hover:opacity-100 transition duration-200"></div>
                 <div className="relative px-8 py-3 bg-white rounded-lg leading-none flex items-center divide-x divide-gray-200">
                   <span className="pr-3 text-purple-600 group-hover:text-purple-700 font-semibold transition duration-200">Request Beta Access</span>
